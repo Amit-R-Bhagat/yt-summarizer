@@ -226,4 +226,5 @@ if __name__ == '__main__':
     # Running Flask Application
     # app.run()
     flask_app = create_app()
-    serve(flask_app, host='0.0.0.0', port=80, debug=False, url_scheme='https')
+    flask_app.run()
+    # serve(flask_app, host='0.0.0.0', port=80, debug=False, url_scheme='https')
