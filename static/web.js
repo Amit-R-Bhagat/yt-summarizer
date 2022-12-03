@@ -2,12 +2,29 @@
 const url_input = document.getElementById("url_input");
 const summarize_button = document.getElementById("my_button");
 const download_button = document.getElementById("download_button");
+
 const percent_dropdown = document.getElementById('percent-dropdown');
 const choice_dropdown = document.getElementById('summary-dropdown');
 
 const youtube_div = document.getElementById("youtube");
 const text_out_main_div = document.getElementById("text_out_main");
 const re_summarize_element = document.getElementById('re_summarize');
+
+let summary = "Hello World";
+//speech
+function speak(){
+    console.log(summary);
+    var msg = new SpeechSynthesisUtterance(summary);
+    window.speechSynthesis.cancel();
+
+    window.speechSynthesis.speak(msg);
+    msg.onend = () => {
+        console.log('finished');
+    }
+    
+
+}
+
 
 // Button Click Listener for InitializeSummary() Function
 summarize_button.addEventListener("click", initializeSummary);
@@ -67,12 +84,12 @@ function initializeSummary() {
                 if (result.success) {
                     // If result was successfully received. Then, parse the result_response JSON
                     const response_json = (result.response);
-
+                    summary = response_json.processed_summary.substring(0,2000);
                     // Use the values present in JSON for displaying summary.
-                    text_out_content_element.innerHTML = "<b>Processed Summary:</b> " + response_json.processed_summary
+                    text_out_content_element.innerHTML = "<div class='summary'> "
                         + "<p>In your video, there are <b>" + response_json.length_original + "</b> characters in <b>" + response_json.sentence_original + "</b> sentences."
-                        + "<br>The processed summary has <b>" + response_json.length_summary + "</b> characters in <b>" + response_json.sentence_summary + "</b> sentences."
-                        + "</br><br>";
+                        + "<br>The processed summary has <b>" + response_json.length_summary + "</b> characters in <b>" + response_json.sentence_summary + "</b> sentences. <br><br>" + `<b>Processed Summary:  <button class='speak' onclick='speak()'><i class='fa-solid fa-volume-high'></i></button></b>  <p>${response_json.processed_summary}</p>`
+                        + "</br><br> </div>";
 
                     // Populating the globally created dictionary
                     download_info.script = response_json.processed_summary
@@ -153,3 +170,34 @@ function downloadScript() {
     element.click();
     document.body.removeChild(element);
 }
+
+function toggleModal(e){
+    console.log("toggleModal");
+    // modal code
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = e.target
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+}
+

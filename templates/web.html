@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@300;400&display=swap"
           rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f5cf45184.js" crossorigin="anonymous"></script>
+
     <!--Add web.css to this HTML file.-->
     <link rel="stylesheet" href="/static/web.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +18,6 @@
     <title>YouTube Transcript Summarizer | Web Summarizer</title>
 
     <link href="/static/favicon.png" rel="icon">
-
 </head>
 <body>
 <!--YouTube Logo Fetching From Online-->
@@ -33,7 +34,7 @@
 
     <!--Summary Choice Selection Dropdown-->
     <div class="custom-select">
-        <select id="summary-dropdown">
+        <select id="summary-dropdown" onchange="toggleModal(event)">
             <option class="dropdown-text" value="0">Summary Algorithm</option>
             <option class="dropdown-text" value="1">Text Rank Algorithm Based (Gensim)</option>
             <option class="dropdown-text" value="2">Frequency Based (NLTK)</option>
@@ -73,6 +74,17 @@
     <h5 id="re_summarize" style="display: none;">
         Click <a href="javascript:location.reload();">here</a> to summarize another video.</h5>
 </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+  
+  </div>
 
 <!-- Add bootstrap JS  -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
